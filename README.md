@@ -1,0 +1,1 @@
+This is repository for javascript exercise for week1
