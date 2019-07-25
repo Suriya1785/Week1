@@ -34,13 +34,17 @@
                     <button class="btn btn-sm btn-secondary btn-block" onclick="ftoc()" type="submit">submit</button>
                 </div>
                 <label class="d-none d-md-block" for="celsiusId">Celsius :</label>
-                <input type="text" class="form-control" id="celsiusId" name="celsiusId">
+                <input type="text" class="form-control" id="celsiusId" name="celsiusId" readonly>
             </div>
+
+
         </div>
 
     </div>
 
     <script>
+        "Use Strict";
+
         function ftoc() {
             var celsius, temp, fahrenheitElement, const32, const5, const9;
             fahrenheitElement = document.getElementById("inputFahrenheit");
