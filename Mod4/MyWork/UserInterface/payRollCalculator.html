@@ -65,10 +65,10 @@
         function payRollCalculator() {
             var stdHrsWorked, overtimeHoursWorked, grossPay, personHrsOfWorked, perPayRate, overtimePayRate, taxableIncome, filingStatus, medicareTaxPct, medicareTax, socialTax, socialTaxPct;
 
-            temp1 = document.getElementById("inputHrsWorked");
-            personHrsOfWorked = parseFloat(inputHrsWorked.value);
-            temp2 = document.getElementById("inputPayRate");
-            perPayRate = parseFloat(inputPayRate.value);
+            const inputHrsWorkedField = document.getElementById("inputHrsWorked");
+            personHrsOfWorked = parseFloat(inputHrsWorkedField.value);
+            const inputPayRateField = document.getElementById("inputPayRate");
+            perPayRate = parseFloat(inputPayRateField.value);
             console.log("HrsWorked : " + personHrsOfWorked);
             console.log("inputPayRate : " + perPayRate);
             // Company thresholds 
