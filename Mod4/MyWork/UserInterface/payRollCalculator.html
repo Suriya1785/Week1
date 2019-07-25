@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Font Awesome: https://fontawesome.com/icons?d=gallery&m=free -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <title>Payroll Calculator</title>
+</head>
+
+<body>
+    <!-- Start Body -->
+    <div class="container">
+        <div class="row">
+            <h1 col-md-4>
+                PayRoll Calculator
+            </h1>
+        </div>
+
+        <!-- Collect input Fahrenheit-->
+        <div>
+
+            <div class="justify-content-center">
+                <!-- <form> -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="col-form-label col-md-4 d-none d-md-block" for="inputHrsWorked">Hrs_Worked</label>
+                        <input type="text" id="inputHrsWorked" name="inputHrsWorked" class="form-control" placeholder="Hrs Worked" required autofocus>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-form-label col-sm-4 d-none d-md-block" for="inputPayRate">Pay_Rate:</label>
+                        <input type="text" id="inputPayRate" name="inputPayRate" class="form-control" placeholder="Enter Pay rate" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-form-label col-sm-4 d-none d-md-block" for="inputNoOfExempt">No_Of_Exempt:</label>
+                        <input type="text" id="inputNoOfExempt" name="inputNoOfExempt" class="form-control" placeholder="No of exempt" required>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center offset-md-4 col-md-4">
+                    <button class="btn btn-sm btn-block btn-primary" onclick="payRollCalculator()" type="submit">Calculate</button>
+                </div>
+                <Section>
+                    <p id="paraGrossPayId" class="bg-light text-success"></p>
+                    <p id="paraFedTaxId" class="bg-light text-success"></p>
+                    <p id="paraSocSecTaxId" class="bg-light text-success"></p>
+                    <p id="paraMedicareTaxId" class="bg-light text-success"></p>
+                    <p id="paraNetPayId" class="bg-light text-success"></p>
+                </Section>
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        "Use Strict";
+
+        function payRollCalculator() {
+            var stdHrsWorked, overtimeHoursWorked, grossPay, personHrsOfWorked, perPayRate, overtimePayRate, taxableIncome, filingStatus, medicareTaxPct, medicareTax, socialTax, socialTaxPct;
+
+            temp1 = document.getElementById("inputHrsWorked");
+            personHrsOfWorked = parseFloat(inputHrsWorked.value);
+            temp2 = document.getElementById("inputPayRate");
+            perPayRate = parseFloat(inputPayRate.value);
+            console.log("HrsWorked : " + personHrsOfWorked);
+            console.log("inputPayRate : " + perPayRate);
+            // Company thresholds 
+            overtimePayRate = 1.5;
+            medicareTaxPct = 0.062;
+            socialTaxPct = 0.0145;
+            stdHrsWorked = 40;
+
+            // Calculation of grossPay per week
+            if (personHrsOfWorked <= stdHrsWorked) {
+                // Gross pay calculation for resource less than standard hours of work
+                grossPay = perPayRate * personHrsOfWorked;
+            } else {
+                // Gross pay calculation for resource More than standard hours of work
+                overtimeHoursWorked = personHrsOfWorked - stdHrsWorked;
+                grossPay = (overtimePayRate * overtimeHoursWorked) + (perPayRate * stdHrsWorked);
+            }
+
+            // Calculation of taxable income per year / Multiply it by 52 weeks (approximate)
+            taxableIncome = grossPay * 52;
+            // Calculation based on taxable income for filing Status "Single"
+            if (filingStatus == "Single") {
+                if (taxableIncome < 12000) {
+                    fedTax = taxableIncome * 0.05;
+                } else if (taxableIncome < 24500) {
+                    fedTax = taxableIncome * 0.1;
+                } else if (taxableIncome < 74500) {
+                    fedTax = taxableIncome * 0.15;
+                } else {
+                    fedTax = taxableIncome * 0.2;
+                }
+            } else {
+                if (taxableIncome < 12000) {
+                    fedTax = taxableIncome * 0;
+                } else if (taxableIncome < 24500) {
+                    fedTax = taxableIncome * 0.06;
+                } else if (taxableIncome < 74500) {
+                    fedTax = taxableIncome * 0.11;
+                } else {
+                    fedTax = taxableIncome * 0.2;
+                }
+            }
+            medicareTax = taxableIncome * medicareTaxPct;
+            socialTax = taxableIncome * socialTaxPct;
+            netPay = taxableIncome - medicareTax - socialTax - fedTax;
+
+            //Print the calculated Federal Tax
+            console.log("Federal tax for the given taxable income " + taxableIncome + " with filing status of " + filingStatus + " is: " + fedTax);
+            console.log("Taxable income : " + taxableIncome.toFixed(2));
+            console.log("Medicare Tax : " + medicareTax.toFixed(2));
+            console.log("Social Tax : " + socialTax.toFixed(2));
+            console.log("Net Pay : " + netPay.toFixed(2));
+
+            var fedPara = document.getElementById("paraFedTaxId");
+            fedPara.innerHTML = "Federal Tax is : " + fedTax.toFixed(2);
+            var medPara = document.getElementById("paraMedicareTaxId");
+            medPara.innerHTML = "Medicare Tax is : " + medicareTax.toFixed(2);
+            var socPara = document.getElementById("paraSocSecTaxId");
+            socPara.innerHTML = "Social Tax : " + socialTax.toFixed(2);
+            var grossPara = document.getElementById("paraGrossPayId");
+            grossPara.innerHTML = "Gross Pay : " + grossPay.toFixed(2);
+            var netpara = document.getElementById("paraNetPayId");
+            netpara.innerHTML = "Net Pay : " + netPay.toFixed(2);
+        }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous"></script>
+</body>
