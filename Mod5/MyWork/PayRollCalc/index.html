@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Font Awesome: https://fontawesome.com/icons?d=gallery&m=free -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <!-- script has the calculation-->
+    <script src="scripts/payRollFn.js"></script>
+
+    <!-- Windows onload script to assign functions to button-->
+    <script>
+        var inputHrsWorkedField, inputPayRateField, inputNoOfWithholdField;
+        window.onload = function() {
+            inputHrsWorkedField = document.getElementById("inputHrsWorked");
+            inputPayRateField = document.getElementById("inputPayRate");
+            inputNoOfWithholdField = document.getElementById("inputNoOfWithhold");
+            const calcBtnField = document.getElementById("calcBtn");
+            calcBtn.onclick = payRollCalculator;
+        }
+    </script>
+
+    <title>Payroll Calculator</title>
+</head>
+
+<body>
+    <!-- Start Body -->
+    <div class="container">
+        <div class="row">
+            <h1 col-md-4>
+                PayRoll Calculator
+            </h1>
+        </div>
+
+        <!-- Collect input Fahrenheit-->
+        <main>
+            <div class="justify-content-center">
+                <!-- <form> -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="col-form-label col-md-4 d-none d-md-block font-weight-bold" for="inputHrsWorked">Hrs_Worked</label>
+                        <input type="text" id="inputHrsWorked" name="inputHrsWorked" class="form-control border-5" placeholder="Hrs Worked" required autofocus>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-form-label col-sm-4 d-none d-md-block font-weight-bold" for="inputPayRate">Pay_Rate:</label>
+                        <input type="text" id="inputPayRate" name="inputPayRate" class="form-control" placeholder="Enter Pay rate" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-form-label col-sm-4 d-none d-md-block font-weight-bold" for="inputNoOfWithhold">No_Of_WithHoldings:</label>
+                        <input type="text" id="inputNoOfWithhold" name="inputNoOfWithhold" class="form-control" placeholder="Enter No of withHoldings" required>
+                    </div>
+                </div>
+
+                <!-- below form is for fields on different rows-->
+                <!-- <div class="col-md-4">
+                    <div>
+                        <label class="row-md-4" for="inputHrsWorked">Hrs_Worked</label>
+                        <input type="text" id="inputHrsWorked" name="inputHrsWorked" class="form-control border-5" placeholder="Hrs Worked" required autofocus>
+                    </div>
+                    <div>
+                        <label class="row-form-label row-sm-4 d-none d-md-block" for="inputPayRate">Pay_Rate:</label>
+                        <input type="text" id="inputPayRate" name="inputPayRate" class="form-control" placeholder="Enter Pay rate" required>
+                    </div>
+                    <div>
+                        <label class="row-form-label col-sm-4 d-none d-md-block" for="inputNoOfWithhold">No_Of_WithHoldings:</label>
+                        <input type="text" id="inputNoOfWithhold" name="inputNoOfWithhold" class="form-control" placeholder="Enter No of withHoldings" required>
+                    </div>
+                </div> -->
+
+                <div class="row justify-content-center offset-md-4 mt-3 col-md-4">
+                    <button id="calcBtn" class="btn btn-sm btn-block btn-primary" type="button">Calculate</button>
+                </div>
+                <Section>
+                    <p id="paraGrossPayId" class="bg-light text-success"></p>
+                    <p id="paraFedTaxId" class="bg-light text-success"></p>
+                    <p id="paraSocSecTaxId" class="bg-light text-success"></p>
+                    <p id="paraMedicareTaxId" class="bg-light text-success"></p>
+                    <p id="paraNetPayId" class="bg-light text-success"></p>
+                </Section>
+                <section>
+                    <table class="table table-responsive-sm table-bordered" id="taxTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Gross Pay
+                                </th>
+                                <th>
+                                    Federal Tax
+                                </th>
+                                <th>
+                                    Social Tax
+                                </th>
+                                <th>
+                                    Medicare Tax
+                                </th>
+                                <th>
+                                    Net Pay
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="grossPayId">
+
+                                </td>
+                                <td id="fedTaxId">
+
+                                </td>
+                                <td id="socSecTaxId">
+
+                                </td>
+                                <td id="medicareTaxId">
+
+                                </td>
+                                <td id="netPayId">
+
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <span class="font-weight-light small">List of calculated taxes</span>
+                        </tfoot>
+                    </table>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous"></script>
+</body>

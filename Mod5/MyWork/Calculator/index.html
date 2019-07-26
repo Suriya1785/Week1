@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Font Awesome: https://fontawesome.com/icons?d=gallery&m=free -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <!-- script has the calculation-->
+    <script src="scripts/operator.js"></script>
+
+    <!-- Windows onload script to assign functions to button-->
+    <script>
+        var inputNum1Field, inputNum2Field;
+        window.onload = function() {
+            inputNum1Field = document.getElementById("inputNum1");
+            inputNum2Field = document.getElementById("inputNum2");
+            const addBtnField = document.getElementById("addBtn");
+            addBtnField.onclick = addNumbers;
+            const subBtnField = document.getElementById("subBtn")
+            subBtnField.onclick = subNumbers;
+            const multiplyBtn = document.getElementById("multiplyBtn")
+            multiplyBtn.onclick = multiplyNumbers;
+            const divideBtn = document.getElementById("divideBtn")
+            divideBtn.onclick = divideNumbers;
+        }
+    </script>
+    <title>Calculator</title>
+</head>
+
+<body>
+    <!-- Start Body -->
+    <div class="container">
+        <header class="row">
+            <h1 col-md-4>
+                Calculator
+            </h1>
+        </header>
+
+        <!-- Collect input numbers-->
+        <main>
+            <div class="justify-content-center">
+                <!-- input text boxes to get user input-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="col-md-6 d-none d-inline font-weight-bold" for="inputNum1">Number 1:</label>
+                        <input type="text" id="inputNum1" name="inputNum1" class="d-inline mt-3" placeholder="Enter 1st Number" required autofocus>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="col-md-6 d-none d-inline font-weight-bold" for="inputNum2">Number 2:</label>
+                        <input type="text" id="inputNum2" name="inputNum2" class="d-inline mt-3" placeholder="Enter 2nd Number" required>
+                    </div>
+                </div>
+                <div class="row col-md-8">
+                    <div class=col-sm>
+                        <button class="btn btn-sm btn-inline btn-primary mt-4 mr-5 form-control" id="addBtn" type="button">Add</button>
+                    </div>
+                    <div class=col-sm>
+                        <button class="btn btn-sm btn-inline btn-primary mt-4 mr-5 form-control" id="subBtn" type="button">Subtract</button>
+                    </div>
+                    <div class=col-sm>
+                        <button class="btn btn-sm btn-inline btn-primary mt-4 mr-5 form-control" id="multiplyBtn" type="button">Multiply</button>
+                    </div>
+                    <div class=col-sm>
+                        <button class="btn btn-sm btn-inline btn-primary mt-4 mr-5 form-control" id="divideBtn" type="button">Divide</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="col-form-label col-md-4 d-none d-inline font-weight-bold" for="outputResult">Answer:</label>
+                        <input type="text" id="outputResult" name="outputResult" class="d-inline mt-4">
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous"></script>
+</body>
